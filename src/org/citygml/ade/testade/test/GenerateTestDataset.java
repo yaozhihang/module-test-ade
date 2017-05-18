@@ -29,6 +29,7 @@ import org.citygml4j.model.gml.basicTypes.Measure;
 import org.citygml4j.model.gml.geometry.AbstractGeometry;
 import org.citygml4j.model.gml.geometry.GeometryProperty;
 import org.citygml4j.model.gml.geometry.aggregates.MultiCurve;
+import org.citygml4j.model.gml.geometry.aggregates.MultiCurveProperty;
 import org.citygml4j.model.gml.geometry.primitives.CurveProperty;
 import org.citygml4j.model.gml.geometry.primitives.LineString;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
@@ -37,8 +38,6 @@ import org.citygml4j.xml.io.CityGMLOutputFactory;
 import org.citygml4j.xml.io.reader.CityGMLReader;
 import org.citygml4j.xml.io.reader.FeatureReadMode;
 import org.citygml4j.xml.io.writer.CityGMLWriter;
-
-import net.opengis.gml.GeometryPropertyType;
 
 public class GenerateTestDataset {
 
@@ -54,7 +53,14 @@ public class GenerateTestDataset {
 		
 		CityModel cityModel = new CityModel();
 		
-		// create industrial building
+		// create a building unit being a city object member of the city model and
+		// enrich it with a Lod3MultiCurve property
+		BuildingUnit globalBuildingUnit = new BuildingUnit();
+		MultiCurve lod3MultiCurve = new MultiCurve();
+		globalBuildingUnit.setLod3MultiCurve(new MultiCurveProperty(lod3MultiCurve));
+		cityModel.getCityObjectMember().add(new CityObjectMember(globalBuildingUnit));
+		
+		// create an industrial building
 		IndustrialBuilding industrialBuilding = new IndustrialBuilding();
 		
 		industrialBuilding.addGenericApplicationPropertyOfAbstractBuilding(new OwnerNameProperty("TUM"));
@@ -74,9 +80,8 @@ public class GenerateTestDataset {
 		EnergyPerformanceCertificationProperty certificationProp = new EnergyPerformanceCertificationProperty(certification);				
 		EnergyPerformanceCertificationPropertyElement certificationADEProp = new EnergyPerformanceCertificationPropertyElement(certificationProp);
 		buildingPart.addGenericApplicationPropertyOfAbstractBuilding(certificationADEProp);
-		
-		MultiCurve multiCurve = new MultiCurve();
-		// Read geometry information from another CityGML file and assign to building units
+
+		// Read geometry information from another CityGML file
 		CityGMLReader citygmlReader = citygmlInputFactory.createCityGMLReader(new File("datasets/LOD4_building_element.xml"));
 		while (citygmlReader.hasNext()) {
 			CityGML feature = citygmlReader.nextFeature();
@@ -112,7 +117,7 @@ public class GenerateTestDataset {
 					if (geometryProperty.isSetGeometry()) {
 						AbstractGeometry abstractGeometry = geometryProperty.getGeometry();
 						if (abstractGeometry.getGMLClass() == GMLClass.LINE_STRING) {
-							multiCurve.addCurveMember(new CurveProperty((LineString)abstractGeometry));
+							lod3MultiCurve.addCurveMember(new CurveProperty((LineString)abstractGeometry));
 						}
 					}			
 				}	
