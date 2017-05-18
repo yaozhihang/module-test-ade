@@ -330,6 +330,9 @@ public class TestADEUnmarshaller implements ADEUnmarshaller {
 		IndustrialBuilding dest = new IndustrialBuilding();
 		helper.getBuilding200Unmarshaller().unmarshalAbstractBuilding(src, dest);
 		
+		if (src.isSetRemark())
+			dest.setRemark(src.getRemark());
+		
 		return dest;
 	}
 	
