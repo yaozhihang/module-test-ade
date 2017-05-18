@@ -22,14 +22,23 @@ import org.citygml4j.model.citygml.building.BuildingPart;
 import org.citygml4j.model.citygml.building.BuildingPartProperty;
 import org.citygml4j.model.citygml.core.CityModel;
 import org.citygml4j.model.citygml.core.CityObjectMember;
+import org.citygml4j.model.citygml.generics.GenericCityObject;
+import org.citygml4j.model.gml.GMLClass;
 import org.citygml4j.model.gml.basicTypes.Code;
 import org.citygml4j.model.gml.basicTypes.Measure;
+import org.citygml4j.model.gml.geometry.AbstractGeometry;
+import org.citygml4j.model.gml.geometry.GeometryProperty;
+import org.citygml4j.model.gml.geometry.aggregates.MultiCurve;
+import org.citygml4j.model.gml.geometry.primitives.CurveProperty;
+import org.citygml4j.model.gml.geometry.primitives.LineString;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 import org.citygml4j.xml.io.CityGMLInputFactory;
 import org.citygml4j.xml.io.CityGMLOutputFactory;
 import org.citygml4j.xml.io.reader.CityGMLReader;
 import org.citygml4j.xml.io.reader.FeatureReadMode;
 import org.citygml4j.xml.io.writer.CityGMLWriter;
+
+import net.opengis.gml.GeometryPropertyType;
 
 public class GenerateTestDataset {
 
@@ -66,6 +75,7 @@ public class GenerateTestDataset {
 		EnergyPerformanceCertificationPropertyElement certificationADEProp = new EnergyPerformanceCertificationPropertyElement(certificationProp);
 		buildingPart.addGenericApplicationPropertyOfAbstractBuilding(certificationADEProp);
 		
+		MultiCurve multiCurve = new MultiCurve();
 		// Read geometry information from another CityGML file and assign to building units
 		CityGMLReader citygmlReader = citygmlInputFactory.createCityGMLReader(new File("datasets/LOD4_building_element.xml"));
 		while (citygmlReader.hasNext()) {
@@ -94,6 +104,18 @@ public class GenerateTestDataset {
 				buildingUnit.getEnergyPerformanceCertification().add(new EnergyPerformanceCertificationProperty(certification));				
 				BuildingUnitPropertyElement adeUnitProp = new BuildingUnitPropertyElement(new BuildingUnitProperty(buildingUnit));
 				industrialBuilding.addGenericApplicationPropertyOfAbstractBuilding(adeUnitProp);		
+			}
+			else if (feature.getCityGMLClass() == CityGMLClass.GENERIC_CITY_OBJECT){
+				GenericCityObject genericCityObject = (GenericCityObject)feature;
+				GeometryProperty<? extends AbstractGeometry> geometryProperty = genericCityObject.getLod4Geometry();
+				if (geometryProperty != null) {
+					if (geometryProperty.isSetGeometry()) {
+						AbstractGeometry abstractGeometry = geometryProperty.getGeometry();
+						if (abstractGeometry.getGMLClass() == GMLClass.LINE_STRING) {
+							multiCurve.addCurveMember(new CurveProperty((LineString)abstractGeometry));
+						}
+					}			
+				}	
 			}
 		}
 		
