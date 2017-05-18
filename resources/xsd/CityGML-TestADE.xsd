@@ -81,7 +81,9 @@
   <complexType name="IndustrialBuildingType">
     <complexContent>
       <extension base="bldg:AbstractBuildingType">
-        <sequence/>
+        <sequence>
+          <element minOccurs="0" name="remark" type="string"/>
+        </sequence>
       </extension>
     </complexContent>
   </complexType>
