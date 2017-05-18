@@ -49,6 +49,7 @@ public class Test {
 		// create building part and assign to industrial building
 		BuildingPart buildingPart = new BuildingPart();
 		industrialBuilding.addConsistsOfBuildingPart(new BuildingPartProperty(buildingPart));
+		industrialBuilding.setRemark("test remark");
 
 		// create energy performance certification and
 		// assign to building part via ADE hook
@@ -60,7 +61,7 @@ public class Test {
 		EnergyPerformanceCertificationPropertyElement certificationADEProp = new EnergyPerformanceCertificationPropertyElement(certificationProp);
 		buildingPart.addGenericApplicationPropertyOfAbstractBuilding(certificationADEProp);
 		
-		// create building unit with DHW facilitiy and
+		// create building unit with DHW facility and
 		// assign to industrial building via ADE hook
 		BuildingUnit buildingUnit = new BuildingUnit();
 		DHWFacilities dhwFacilities = new DHWFacilities();

@@ -24,6 +24,7 @@ import net.opengis.citygml.building._2.AbstractBuildingType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.opengis.net/citygml/building/2.0}AbstractBuildingType">
  *       &lt;sequence>
+ *         &lt;element name="remark" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -33,10 +34,41 @@ import net.opengis.citygml.building._2.AbstractBuildingType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IndustrialBuildingType")
+@XmlType(name = "IndustrialBuildingType", propOrder = {
+    "remark"
+})
 public class IndustrialBuildingType
     extends AbstractBuildingType
 {
 
+    protected String remark;
+
+    /**
+     * Ruft den Wert der remark-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * Legt den Wert der remark-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRemark(String value) {
+        this.remark = value;
+    }
+
+    public boolean isSetRemark() {
+        return (this.remark!= null);
+    }
 
 }

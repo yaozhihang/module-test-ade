@@ -9,7 +9,20 @@ import org.citygml4j.model.common.visitor.GMLFunctor;
 import org.citygml4j.model.common.visitor.GMLVisitor;
 
 public class IndustrialBuilding extends AbstractBuilding implements ADEModelObject {
+	private String remark;
+	
+	public String getRemark() {
+		return remark;
+	}
+	
+	public boolean isSetRemark() {
+		return remark != null;
+	}
 
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
 	@Override
 	public Object copy(CopyBuilder copyBuilder) {
 		return copyTo(new IndustrialBuilding(), copyBuilder);
@@ -18,6 +31,10 @@ public class IndustrialBuilding extends AbstractBuilding implements ADEModelObje
 	@Override
 	public Object copyTo(Object target, CopyBuilder copyBuilder) {
 		IndustrialBuilding copy = (target == null) ? new IndustrialBuilding() : (IndustrialBuilding)target;
+		
+		if (isSetRemark())
+			copy.setRemark(copyBuilder.copy(remark));
+		
 		return super.copyTo(copy, copyBuilder);
 	}
 	

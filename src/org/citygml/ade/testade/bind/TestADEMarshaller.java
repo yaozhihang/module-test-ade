@@ -327,7 +327,11 @@ public class TestADEMarshaller implements ADEMarshaller {
 	public IndustrialBuildingType marshalIndustrialBuilding(IndustrialBuilding src) {
 		IndustrialBuildingType dest = factory.createIndustrialBuildingType();
 		helper.getBuilding200Marshaller().marshalAbstractBuilding(src, dest);
-
+		
+		if (src.isSetRemark()) {
+			dest.setRemark(src.getRemark());
+		}
+		
 		return dest;
 	}
 
