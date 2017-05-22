@@ -10,7 +10,7 @@
   <complexTypes>
     <complexType id="EnergyPerformanceCertificationType" path="EnergyPerformanceCertification" table="test_energy_perform_cert" schema="test">
       <attribute path="certificationName" column="certification_name" type="string" schema="test"/>
-      <attribute path="certificationId" column="certification_id" type="string" schema="test"/>
+      <attribute path="certificationId" column="certification_id" type="string" minOccurs="1" schema="test"/>
     </complexType>
   </complexTypes>
 
@@ -20,7 +20,7 @@
       <extension base="AbstractFeatureType">
         <join table="cityobject" fromColumn="id" toColumn="id"/>
       </extension>
-      <complexAttribute path="totalValue" schema="test">
+      <complexAttribute path="totalValue" minOccurs="1" schema="test">
         <attribute path="." column="total_value" type="string" schema="test"/>
         <attribute path="@codeSpace" column="total_value_codespace" type="string" schema="gml"/>
       </complexAttribute>
@@ -37,6 +37,7 @@
     <!-- industrial building -->
     <featureType id="IndustrialBuildingType" path="IndustrialBuilding" table="building" schema="test" objectClassId="203" topLevel="true">
       <extension base="AbstractBuildingType"/>
+      <attribute path="remark" column="remark" type="string" schema="test"/>
     </featureType>
 
     <!-- building units -->
@@ -108,7 +109,7 @@
       <complexProperty path="energyPerformanceCertification" schema="test">
         <type path="EnergyPerformanceCertification" schema="test">
           <attribute path="certificationName" column="certification_name" type="string" schema="test"/>
-          <attribute path="certificationId" column="certification_id" type="string" schema="test"/>
+          <attribute path="certificationId" column="certification_id" type="string" minOccurs="1" schema="test"/>
         </type>
       </complexProperty>
       <featureProperty path="buildingUnit" target="AbstractBuildingUnitType" schema="test">
