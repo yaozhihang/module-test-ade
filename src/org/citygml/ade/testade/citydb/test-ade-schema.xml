@@ -16,7 +16,7 @@
 
   <featureTypes>
     <!-- facilities -->
-    <featureType id="AbstractFacilitiesType" path="Facilities" table="test_facilities" schema="test" objectClass="200" abstract="true">
+    <featureType id="AbstractFacilitiesType" path="Facilities" table="test_facilities" schema="test" objectClassId="200" abstract="true">
       <extension base="AbstractFeatureType">
         <join table="cityobject" fromColumn="id" toColumn="id"/>
       </extension>
@@ -26,21 +26,21 @@
       </complexAttribute>
     </featureType>
 
-    <featureType id="DHWFacilitiesType" path="DHWFacilities" table="test_facilities" schema="test" objectClass="201">
+    <featureType id="DHWFacilitiesType" path="DHWFacilities" table="test_facilities" schema="test" objectClassId="201">
       <extension base="AbstractFacilitiesType"/>
     </featureType>
 
-    <featureType id="LightingFacilitiesType" path="LightingFacilities" table="test_facilities" schema="test" objectClass="202">
+    <featureType id="LightingFacilitiesType" path="LightingFacilities" table="test_facilities" schema="test" objectClassId="202">
       <extension base="AbstractFacilitiesType"/>
     </featureType>
 
     <!-- industrial building -->
-    <featureType id="IndustrialBuildingType" path="IndustrialBuilding" table="building" schema="test" objectClass="203" topLevel="true">
+    <featureType id="IndustrialBuildingType" path="IndustrialBuilding" table="building" schema="test" objectClassId="203" topLevel="true">
       <extension base="AbstractBuildingType"/>
     </featureType>
 
     <!-- building units -->
-    <featureType id="AbstractBuildingUnitType" path="_AbstractBuildingUnit" table="test_building_unit" schema="test" objectClass="204" abstract="true">
+    <featureType id="AbstractBuildingUnitType" path="_AbstractBuildingUnit" table="test_building_unit" schema="test" objectClassId="204" abstract="true">
       <extension base="AbstractCityObjectType">
         <join table="cityobject" fromColumn="id" toColumn="id"/>
       </extension>
@@ -88,11 +88,11 @@
       </featureProperty>
     </featureType>
 
-    <featureType id="BuildingUnitPartType" path="BuildingUnitPart" table="test_building_unit" schema="test" objectClass="205">
+    <featureType id="BuildingUnitPartType" path="BuildingUnitPart" table="test_building_unit" schema="test" objectClassId="205">
       <extension base="AbstractBuildingUnitType"/>
     </featureType>
 
-    <featureType id="BuildingUnitType" path="BuildingUnit" table="test_building_unit" schema="test" objectClass="206">
+    <featureType id="BuildingUnitType" path="BuildingUnit" table="test_building_unit" schema="test" objectClassId="206">
       <extension base="AbstractBuildingUnitType"/>
     </featureType>
   </featureTypes>

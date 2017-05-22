@@ -1,6 +1,7 @@
 package org.citygml.ade.testade.model;
 
 import org.citygml4j.builder.copy.CopyBuilder;
+import org.citygml4j.model.citygml.CityGMLClass;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.common.visitor.FeatureFunctor;
@@ -56,6 +57,11 @@ public class IndustrialBuilding extends AbstractBuilding implements ADEModelObje
 	@Override
 	public <T> T accept(GMLFunctor<T> visitor) {
 		return visitor.apply((ADEModelObject)this);
+	}
+
+	@Override
+	public CityGMLClass getCityGMLClass() {
+		return CityGMLClass.ADE_COMPONENT;
 	}
 
 }
