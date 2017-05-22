@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><ShapeChangeResult xmlns="http://www.interactive-instruments.de/ShapeChange/Result" xmlns:r="http://www.interactive-instruments.de/ShapeChange/Result" config="C:\Eclipse_CityGML\3DCityDB_Workspace\module-test-ade\resources\uml\ShapeChangeConfigurationFile.xml" end="Mon May 22 20:41:29 CEST 2017" resultCode="0" start="Mon May 22 20:39:45 CEST 2017" version="2.3.0">
+  <Messages>
+    <Info message="---------- Semantic validation of ShapeChange configuration: START ----------"/>
+    <Info message="---------- Semantic validation of ShapeChange configuration: COMPLETE ----------"/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'Color' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'ColorPlusOpacity' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'DoubleBetween0and1' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'DoubleBetween0and1List' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'IntegerBetween0and4' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'TransformationMatrix2x2' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'TransformationMatrix3x4' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Stereotype &lt;&lt;basictype&gt;&gt; of class 'TransformationMatrix4x4' is not an allowed value in encoding rule 'citygml-ade' and is ignored."/>
+    <Info message="Application schema found, package name: 'TestADE', target namespace: 'http://www.citygml.org/ade/TestADE/1.0'"/>
+    <Info message="(Converter.java) Now processing target 'XML Schema' for input 'INPUT'."/>
+    <Info message="(Converter.java) Executed target class 'de.interactive_instruments.ShapeChange.Target.XmlSchema.XmlSchema' for input ID: 'INPUT'.&#10;-------------------------------------------------"/>
+    <Info message="Application schema found, package name: 'TestADE', target namespace: 'http://www.citygml.org/ade/TestADE/1.0'"/>
+    <Info message="(Converter.java) Now processing target 'Code List Dictionary' for input 'INPUT'."/>
+    <Info message="(Converter.java) Executed target class 'de.interactive_instruments.ShapeChange.Target.Codelists.CodelistDictionaries' for input ID: 'INPUT'.&#10;-------------------------------------------------"/>
+  </Messages>
+  <Results>
+    <Result href="file:/C:/Eclipse_CityGML/3DCityDB_Workspace/module-test-ade/resources/uml/output/INPUT/CityGML-TestADE.xsd" scope="http://www.citygml.org/ade/TestADE/1.0" target="XML Schema">CityGML-TestADE.xsd</Result>
+  </Results>
+</ShapeChangeResult>
