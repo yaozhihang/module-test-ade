@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemaMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.3dcitydb.org/database/schema/3.0 3dcitydb-schema.xsd" xmlns="http://www.3dcitydb.org/database/schema/3.0">
+<schemaMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.3dcitydb.org/database/schema/3.0 3dcitydb-schema.xsd" xmlns="http://www.3dcitydb.org/database/schema/3.0">
 
+  <metadata>
+    <name>TestADE</name>
+    <version>1.0</version>
+    <description>Artifical ADE for developing and testing the ADE extension of the 3DCityDB</description>
+    <dbPrefix>test</dbPrefix>
+    <initialObjectClassId>10000</initialObjectClassId>
+  </metadata>
+  
   <applicationSchemas>
-    <schema id="test" name="Test ADE">
+    <schema id="test">
       <namespace context="citygml-2.0">http://www.citygml.org/ade/TestADE/1.0</namespace>
     </schema>
   </applicationSchemas>
