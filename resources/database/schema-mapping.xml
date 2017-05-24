@@ -15,7 +15,7 @@
     </complexTypes>
     <objectTypes/>
     <featureTypes>
-        <featureType abstract="true" id="_AbstractBuildingUnitType" table="Test_BuildingUnit" path="_AbstractBuildingUnit" schema="TestADE">
+        <featureType abstract="true" id="_AbstractBuildingUnitType" table="Test_BuildingUnit" topLevel="true" path="_AbstractBuildingUnit" schema="TestADE">
             <extension base="AbstractCityObjectType">
                 <join table="cityobject" fromColumn="ID" toColumn="ID"/>
             </extension>
@@ -58,28 +58,31 @@
                 <join table="Test_BuildingUnit" fromColumn="BuildingUnit_Parent_ID" toColumn="ID"/>
             </featureProperty>
         </featureType>
-        <featureType abstract="true" id="FacilitiesType" table="Test_Facilities" path="Facilities" schema="TestADE">
+        <featureType abstract="true" id="FacilitiesType" table="Test_Facilities" topLevel="true" path="Facilities" schema="TestADE">
+            <extension base="AbstractFeatureType">
+                <join table="cityobject" fromColumn="ID" toColumn="ID"/>
+            </extension>
             <complexAttribute path="totalValue" schema="TestADE">
                 <attribute column="totalValue_uom" type="string" path="@uom" schema="TestADE"/>
                 <attribute column="totalValue" type="double" path="." schema="TestADE"/>
             </complexAttribute>
         </featureType>
-        <featureType id="BuildingUnitPartType" table="Test_BuildingUnit" path="BuildingUnitPart" schema="TestADE">
+        <featureType id="BuildingUnitPartType" table="Test_BuildingUnit" topLevel="true" path="BuildingUnitPart" schema="TestADE">
             <extension base="_AbstractBuildingUnitType"/>
         </featureType>
-        <featureType id="BuildingUnitType" table="Test_BuildingUnit" path="BuildingUnit" schema="TestADE">
+        <featureType id="BuildingUnitType" table="Test_BuildingUnit" topLevel="true" path="BuildingUnit" schema="TestADE">
             <extension base="_AbstractBuildingUnitType"/>
         </featureType>
-        <featureType id="DHWFacilitiesType" table="Test_Facilities" path="DHWFacilities" schema="TestADE">
+        <featureType id="DHWFacilitiesType" table="Test_Facilities" topLevel="true" path="DHWFacilities" schema="TestADE">
             <extension base="FacilitiesType"/>
         </featureType>
-        <featureType id="IndustrialBuildingType" table="Test_IndustrialBuilding" path="IndustrialBuilding" schema="TestADE">
+        <featureType id="IndustrialBuildingType" table="Test_IndustrialBuilding" topLevel="true" path="IndustrialBuilding" schema="TestADE">
             <extension base="AbstractBuildingType">
                 <join table="building" fromColumn="ID" toColumn="ID"/>
             </extension>
             <attribute column="remark" type="string" path="remark" schema="TestADE"/>
         </featureType>
-        <featureType id="LightingFacilitiesType" table="Test_Facilities" path="LightingFacilities" schema="TestADE">
+        <featureType id="LightingFacilitiesType" table="Test_Facilities" topLevel="true" path="LightingFacilities" schema="TestADE">
             <extension base="FacilitiesType"/>
         </featureType>
     </featureTypes>
