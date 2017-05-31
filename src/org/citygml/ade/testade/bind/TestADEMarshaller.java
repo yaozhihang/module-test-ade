@@ -82,9 +82,9 @@ public class TestADEMarshaller implements ADEMarshaller {
 				.with(EnergyPerformanceCertification.class, this::marshalEnergyPerformanceCertification)
 				.with(EnergyPerformanceCertificationProperty.class, this::marshalEnergyPerformanceCertificationProperty)
 				.with(IndustrialBuilding.class, this::marshalIndustrialBuilding)
-				.with(IndustrialBuildingPart.class, this::createIndustrialBuildingPart)
-				.with(IndustrialBuildingRoofSurface.class, this::createIndustrialBuildingRoofSurface)
-				.with(OtherConstruction.class, this::createOtherConstruction);
+				.with(IndustrialBuildingPart.class, this::marshalIndustrialBuildingPart)
+				.with(IndustrialBuildingRoofSurface.class, this::marshalIndustrialBuildingRoofSurface)
+				.with(OtherConstruction.class, this::marshalOtherConstruction);
 	}
 
 	@Override
