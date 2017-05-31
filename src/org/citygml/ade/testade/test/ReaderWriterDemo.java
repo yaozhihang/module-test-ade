@@ -12,8 +12,12 @@ import org.citygml.ade.testade.model.EnergyPerformanceCertificationProperty;
 import org.citygml.ade.testade.model.EnergyPerformanceCertificationPropertyElement;
 import org.citygml.ade.testade.model.FacilitiesProperty;
 import org.citygml.ade.testade.model.IndustrialBuilding;
+import org.citygml.ade.testade.model.IndustrialBuildingPart;
+import org.citygml.ade.testade.model.IndustrialBuildingRoofSurface;
+import org.citygml.ade.testade.model.OtherConstruction;
 import org.citygml4j.CityGMLContext;
 import org.citygml4j.builder.CityGMLBuilder;
+import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
 import org.citygml4j.model.citygml.building.BuildingPart;
 import org.citygml4j.model.citygml.building.BuildingPartProperty;
 import org.citygml4j.model.citygml.core.CityModel;
@@ -46,6 +50,19 @@ public class ReaderWriterDemo {
 		// create industrial building
 		IndustrialBuilding industrialBuilding = new IndustrialBuilding();
 		
+		// create industrial building part
+		IndustrialBuildingPart industrialBuildingPart = new IndustrialBuildingPart();
+		industrialBuildingPart.setRemark("This is a test industrial building part");
+		industrialBuilding.addConsistsOfBuildingPart(new BuildingPartProperty(industrialBuildingPart));
+		
+		// create OtherConstruction
+		OtherConstruction otherConstruction = new OtherConstruction();		
+		
+		// create industrial building roof surface
+		IndustrialBuildingRoofSurface industrialBuildingRoofSurface = new IndustrialBuildingRoofSurface();
+		industrialBuildingRoofSurface.setRemark("This is a test industrial building roof surface");		
+		otherConstruction.addBoundedBySurface(new BoundarySurfaceProperty(industrialBuildingRoofSurface));
+		
 		// create building part and assign to industrial building
 		BuildingPart buildingPart = new BuildingPart();
 		industrialBuilding.addConsistsOfBuildingPart(new BuildingPartProperty(buildingPart));
@@ -75,9 +92,10 @@ public class ReaderWriterDemo {
 		BuildingUnitPropertyElement adeUnitProp = new BuildingUnitPropertyElement(new BuildingUnitProperty(buildingUnit));
 		industrialBuilding.addGenericApplicationPropertyOfAbstractBuilding(adeUnitProp);
 		
-		// create city model and assign industrial building
+		// create city model and assign industrial building and other construction
 		CityModel cityModel = new CityModel();
 		cityModel.addCityObjectMember(new CityObjectMember(industrialBuilding));
+		cityModel.addCityObjectMember(new CityObjectMember(otherConstruction));
 		
 		/**
 		 * Step 2: Write the TestADE features to a CityGML dataset. 

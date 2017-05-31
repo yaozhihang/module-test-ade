@@ -10,9 +10,12 @@ import org.citygml.ade.testade._1.EnergyPerformanceCertificationPropertyType;
 import org.citygml.ade.testade._1.EnergyPerformanceCertificationType;
 import org.citygml.ade.testade._1.FacilitiesPropertyType;
 import org.citygml.ade.testade._1.FacilitiesType;
+import org.citygml.ade.testade._1.IndustrialBuildingPartType;
+import org.citygml.ade.testade._1.IndustrialBuildingRoofSurfaceType;
 import org.citygml.ade.testade._1.IndustrialBuildingType;
 import org.citygml.ade.testade._1.LightingFacilitiesType;
 import org.citygml.ade.testade._1.ObjectFactory;
+import org.citygml.ade.testade._1.OtherConstructionType;
 import org.citygml.ade.testade._1._AbstractBuildingUnitPropertyType;
 import org.citygml.ade.testade._1._AbstractBuildingUnitType;
 import org.citygml.ade.testade.model.AbstractBuildingUnit;
@@ -29,11 +32,15 @@ import org.citygml.ade.testade.model.EnergyPerformanceCertificationPropertyEleme
 import org.citygml.ade.testade.model.FacilitiesProperty;
 import org.citygml.ade.testade.model.FloorAreaProperty;
 import org.citygml.ade.testade.model.IndustrialBuilding;
+import org.citygml.ade.testade.model.IndustrialBuildingPart;
+import org.citygml.ade.testade.model.IndustrialBuildingRoofSurface;
 import org.citygml.ade.testade.model.LightingFacilities;
+import org.citygml.ade.testade.model.OtherConstruction;
 import org.citygml.ade.testade.model.OwnerNameProperty;
 import org.citygml4j.builder.jaxb.marshal.citygml.ade.ADEMarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEMarshaller;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
+import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
 import org.citygml4j.model.citygml.core.AddressProperty;
 import org.citygml4j.model.gml.basicTypes.Code;
 import org.citygml4j.util.jaxb.JAXBMapper;
@@ -59,7 +66,10 @@ public class TestADEMarshaller implements ADEMarshaller {
 				.with(DHWFacilities.class, this::createDHWFacilities)
 				.with(LightingFacilities.class, this::createLightingFacilities)
 				.with(EnergyPerformanceCertification.class, this::createEnergyPerformanceCertification)
-				.with(IndustrialBuilding.class, this::createIndustrialBuilding);
+				.with(IndustrialBuilding.class, this::createIndustrialBuilding)
+				.with(IndustrialBuildingPart.class, this::createIndustrialBuildingPart)
+				.with(IndustrialBuildingRoofSurface.class, this::createIndustrialBuildingRoofSurface)
+				.with(OtherConstruction.class, this::createOtherConstruction);
 		
 		typeMapper = JAXBMapper.create()
 				.with(BuildingUnit.class, this::marshalBuildingUnit)
@@ -71,7 +81,10 @@ public class TestADEMarshaller implements ADEMarshaller {
 				.with(FacilitiesProperty.class, this::marshalFacilitiesProperty)
 				.with(EnergyPerformanceCertification.class, this::marshalEnergyPerformanceCertification)
 				.with(EnergyPerformanceCertificationProperty.class, this::marshalEnergyPerformanceCertificationProperty)
-				.with(IndustrialBuilding.class, this::marshalIndustrialBuilding);
+				.with(IndustrialBuilding.class, this::marshalIndustrialBuilding)
+				.with(IndustrialBuildingPart.class, this::createIndustrialBuildingPart)
+				.with(IndustrialBuildingRoofSurface.class, this::createIndustrialBuildingRoofSurface)
+				.with(OtherConstruction.class, this::createOtherConstruction);
 	}
 
 	@Override
@@ -334,6 +347,40 @@ public class TestADEMarshaller implements ADEMarshaller {
 		
 		return dest;
 	}
+	
+	public IndustrialBuildingPartType marshalIndustrialBuildingPart(IndustrialBuildingPart src) {
+		IndustrialBuildingPartType dest = factory.createIndustrialBuildingPartType();
+		helper.getBuilding200Marshaller().marshalBuildingPart(src, dest);
+		
+		if (src.isSetRemark()) {
+			dest.setRemark(src.getRemark());
+		}
+		
+		return dest;
+	}
+	
+	public IndustrialBuildingRoofSurfaceType marshalIndustrialBuildingRoofSurface(IndustrialBuildingRoofSurface src) {
+		IndustrialBuildingRoofSurfaceType dest = factory.createIndustrialBuildingRoofSurfaceType();
+		helper.getBuilding200Marshaller().marshalRoofSurface(src, dest);
+		
+		if (src.isSetRemark()) {
+			dest.setRemark(src.getRemark());
+		}
+		
+		return dest;
+	}
+	
+	public OtherConstructionType marshalOtherConstruction(OtherConstruction src) {
+		OtherConstructionType dest = factory.createOtherConstructionType();
+		helper.getCore200Marshaller().marshalAbstractSite(src, dest);
+		
+		if (src.isSetBoundedBySurface()) {
+			for (BoundarySurfaceProperty boundarySurfaceProperty : src.getBoundedBySurface())
+				dest.getBoundedBySurface().add(helper.getBuilding200Marshaller().marshalBoundarySurfaceProperty(boundarySurfaceProperty));
+		}
+		
+		return dest;
+	}
 
 	public JAXBElement<?> createBuildingUnitProperty(BuildingUnitPropertyElement src) {
 		return factory.createBuildingUnitProperty(marshalBuildingUnitProperty(src.getValue()));
@@ -376,4 +423,15 @@ public class TestADEMarshaller implements ADEMarshaller {
 		return factory.createIndustrialBuilding(marshalIndustrialBuilding(src));
 	}
 
+	public JAXBElement<?> createIndustrialBuildingPart(IndustrialBuildingPart src) {
+		return factory.createIndustrialBuildingPart(marshalIndustrialBuildingPart(src));
+	}
+	
+	public JAXBElement<?> createIndustrialBuildingRoofSurface(IndustrialBuildingRoofSurface src) {
+		return factory.createIndustrialBuildingRoofSurface(marshalIndustrialBuildingRoofSurface(src));
+	}
+	
+	public JAXBElement<?> createOtherConstruction(OtherConstruction src) {
+		return factory.createOtherConstruction(marshalOtherConstruction(src));
+	}
 }

@@ -10,8 +10,11 @@ import org.citygml.ade.testade._1.EnergyPerformanceCertificationPropertyType;
 import org.citygml.ade.testade._1.EnergyPerformanceCertificationType;
 import org.citygml.ade.testade._1.FacilitiesPropertyType;
 import org.citygml.ade.testade._1.FacilitiesType;
+import org.citygml.ade.testade._1.IndustrialBuildingPartType;
+import org.citygml.ade.testade._1.IndustrialBuildingRoofSurfaceType;
 import org.citygml.ade.testade._1.IndustrialBuildingType;
 import org.citygml.ade.testade._1.LightingFacilitiesType;
+import org.citygml.ade.testade._1.OtherConstructionType;
 import org.citygml.ade.testade._1._AbstractBuildingUnitPropertyType;
 import org.citygml.ade.testade._1._AbstractBuildingUnitType;
 import org.citygml.ade.testade.model.AbstractBuildingUnit;
@@ -28,7 +31,10 @@ import org.citygml.ade.testade.model.EnergyPerformanceCertificationPropertyEleme
 import org.citygml.ade.testade.model.FacilitiesProperty;
 import org.citygml.ade.testade.model.FloorAreaProperty;
 import org.citygml.ade.testade.model.IndustrialBuilding;
+import org.citygml.ade.testade.model.IndustrialBuildingPart;
+import org.citygml.ade.testade.model.IndustrialBuildingRoofSurface;
 import org.citygml.ade.testade.model.LightingFacilities;
+import org.citygml.ade.testade.model.OtherConstruction;
 import org.citygml.ade.testade.model.OwnerNameProperty;
 import org.citygml4j.builder.jaxb.unmarshal.citygml.ade.ADEUnmarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -41,6 +47,7 @@ import org.citygml4j.util.jaxb.JAXBCheckedMapper;
 import org.citygml4j.xml.io.reader.MissingADESchemaException;
 
 import net.opengis.citygml._2.AddressPropertyType;
+import net.opengis.citygml.building._2.BoundarySurfacePropertyType;
 import net.opengis.gml.AreaType;
 import net.opengis.gml.CodeType;
 
@@ -60,6 +67,9 @@ public class TestADEUnmarshaller implements ADEUnmarshaller {
 				.with(EnergyPerformanceCertificationType.class, this::unmarshalEnergyPerformanceCertification)
 				.with(EnergyPerformanceCertificationPropertyType.class, this::unmarshalEnergyPerformanceCertificationProperty)
 				.with(IndustrialBuildingType.class, this::unmarshalIndustrialBuilding)
+				.with(IndustrialBuildingPartType.class, this::unmarshalIndustrialBuildingPart)
+				.with(IndustrialBuildingRoofSurfaceType.class, this::unmarshalIndustrialBuildingRoofSurface)
+				.with(OtherConstructionType.class, this::unmarshalOtherConstruction)
 				.with(JAXBElement.class, this::unmarshal);
 	}
 
@@ -332,6 +342,38 @@ public class TestADEUnmarshaller implements ADEUnmarshaller {
 		
 		if (src.isSetRemark())
 			dest.setRemark(src.getRemark());
+		
+		return dest;
+	}
+	
+	public IndustrialBuildingPart unmarshalIndustrialBuildingPart(IndustrialBuildingPartType src) throws MissingADESchemaException {
+		IndustrialBuildingPart dest = new IndustrialBuildingPart();
+		helper.getBuilding200Unmarshaller().unmarshalBuildingPart(src, dest);
+		
+		if (src.isSetRemark())
+			dest.setRemark(src.getRemark());
+		
+		return dest;
+	}
+	
+	public IndustrialBuildingRoofSurface unmarshalIndustrialBuildingRoofSurface(IndustrialBuildingRoofSurfaceType src) throws MissingADESchemaException {
+		IndustrialBuildingRoofSurface dest = new IndustrialBuildingRoofSurface();
+		helper.getBuilding200Unmarshaller().unmarshalRoofSurface(src, dest);
+		
+		if (src.isSetRemark())
+			dest.setRemark(src.getRemark());
+		
+		return dest;
+	}
+	
+	public OtherConstruction unmarshalOtherConstruction(OtherConstructionType src) throws MissingADESchemaException {
+		OtherConstruction dest = new OtherConstruction();
+		helper.getCore200Unmarshaller().unmarshalAbstractSite(src, dest);
+		
+		if (src.isSetBoundedBySurface()) {
+			for (BoundarySurfacePropertyType boundarySurfaceProperty : src.getBoundedBySurface())
+				dest.addBoundedBySurface(helper.getBuilding200Unmarshaller().unmarshalBoundarySurfaceProperty(boundarySurfaceProperty));
+		}
 		
 		return dest;
 	}

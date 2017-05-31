@@ -2,7 +2,7 @@
 // Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version 2.4.3+1
 // ade-xjc is part of the citygml4j project, see https://github.com/citygml4j
 // Any modifications to this file will be lost upon recompilation of the source
-// Generated: Wed May 31 12:15:07 CEST 2017
+// Generated: Wed May 31 14:41:12 CEST 2017
 //
 
 
@@ -12,7 +12,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
-import net.opengis.citygml.building._2.BoundarySurfacePropertyType;
 import net.opengis.gml.AreaType;
 
 
@@ -48,7 +47,6 @@ public class ObjectFactory {
     private final static QName _EnergyPerformanceCertification_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "EnergyPerformanceCertification");
     private final static QName _IndustrialBuildingRoofSurface_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "IndustrialBuildingRoofSurface");
     private final static QName _Facilities_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "Facilities");
-    private final static QName _OtherConstructionTypeBoundedBy_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "boundedBy");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.citygml.ade.testade._1
@@ -350,15 +348,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "Facilities", substitutionHeadNamespace = "http://www.opengis.net/gml", substitutionHeadName = "_Feature")
     public JAXBElement<FacilitiesType> createFacilities(FacilitiesType value) {
         return new JAXBElement<FacilitiesType>(_Facilities_QNAME, FacilitiesType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BoundarySurfacePropertyType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "boundedBy", scope = OtherConstructionType.class)
-    public JAXBElement<BoundarySurfacePropertyType> createOtherConstructionTypeBoundedBy(BoundarySurfacePropertyType value) {
-        return new JAXBElement<BoundarySurfacePropertyType>(_OtherConstructionTypeBoundedBy_QNAME, BoundarySurfacePropertyType.class, OtherConstructionType.class, value);
     }
 
 }

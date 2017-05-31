@@ -11,10 +11,17 @@ import org.citygml.ade.testade.model.BuildingUnitPropertyElement;
 import org.citygml.ade.testade.model.DHWFacilities;
 import org.citygml.ade.testade.model.FacilitiesProperty;
 import org.citygml.ade.testade.model.IndustrialBuilding;
+import org.citygml.ade.testade.model.IndustrialBuildingPart;
+import org.citygml.ade.testade.model.IndustrialBuildingRoofSurface;
 import org.citygml.ade.testade.model.LightingFacilities;
+import org.citygml.ade.testade.model.OtherConstruction;
 import org.citygml4j.model.citygml.ade.binding.ADEWalker;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
+import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
+import org.citygml4j.model.citygml.building.BuildingPart;
+import org.citygml4j.model.citygml.building.RoofSurface;
 import org.citygml4j.model.citygml.core.AbstractCityObject;
+import org.citygml4j.model.citygml.core.AbstractSite;
 import org.citygml4j.model.citygml.core.AddressProperty;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.gml.feature.FeatureProperty;
@@ -88,4 +95,27 @@ public class TestADEFeatureFunctionWalker<T> implements ADEWalker<FeatureFunctio
 		return walker.apply((FeatureProperty<?>)buildingUnitPropertyElement.getValue());
 	}
 
+	public T apply(IndustrialBuildingPart industrialBuildingPart) {
+		return walker.apply((BuildingPart)industrialBuildingPart);
+	}
+	
+	public T apply(IndustrialBuildingRoofSurface industrialBuildingRoofSurface) {
+		return walker.apply((RoofSurface)industrialBuildingRoofSurface);
+	}
+	
+	public T apply(OtherConstruction otherConstruction) {
+		T object =  walker.apply((AbstractSite)otherConstruction);
+		if (object != null)
+			return object;
+		
+		if (otherConstruction.isSetBoundedBySurface()) {
+			for (BoundarySurfaceProperty property : new ArrayList<BoundarySurfaceProperty>(otherConstruction.getBoundedBySurface())) {
+				object = walker.apply((FeatureProperty<?>)property);
+				if (object != null)
+					return object;
+			}
+		}
+		
+		return null;
+	}
 }
