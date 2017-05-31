@@ -45,6 +45,8 @@
         <XmlNamespace nsabr="wtr" ns="http://www.opengis.net/citygml/waterbody/2.0" location="http://schemas.opengis.net/citygml/waterbody/2.0/waterBody.xsd"/>      
       </xmlNamespaces>
       <xsdMapEntries>
+    	<XsdMapEntry type="AbstractBoundarySurface" xsdEncodingRules="iso19136_2007" xmlElement="bldg:_BoundarySurface" xmlType="bldg:AbstractBoundarySurfaceType" xmlPropertyType = "bldg:BoundarySurfacePropertyType"/>
+      	<XsdMapEntry type="AbstractSite" xsdEncodingRules="iso19136_2007" xmlElement="core:_Site" xmlType="core:AbstractSiteType"/>
         <XsdMapEntry type="AbstractCityObject" xsdEncodingRules="iso19136_2007" xmlElement="core:_CityObject" xmlType="core:AbstractCityObjectType"/>
 		<XsdMapEntry type="AbstractBuilding" xsdEncodingRules="iso19136_2007" xmlElement="bldg:_AbstractBuilding" xmlType="bldg:AbstractBuildingType"/>
         <XsdMapEntry type="URI" xsdEncodingRules="iso19136_2007" xmlPropertyType="anyURI" xmlType="anyURI" xmlTypeType="simple" xmlTypeContent="simple"/>

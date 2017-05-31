@@ -1,8 +1,8 @@
 //
-// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version null
+// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version 2.4.3+1
 // ade-xjc is part of the citygml4j project, see https://github.com/citygml4j
 // Any modifications to this file will be lost upon recompilation of the source
-// Generated: Wed Apr 26 21:32:57 CEST 2017
+// Generated: Wed May 31 12:15:07 CEST 2017
 //
 
 
@@ -71,8 +71,8 @@ public class FacilitiesPropertyType {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link FacilitiesType }{@code >}
      *     {@link JAXBElement }{@code <}{@link DHWFacilitiesType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link FacilitiesType }{@code >}
      *     {@link JAXBElement }{@code <}{@link LightingFacilitiesType }{@code >}
      *     
      */
@@ -85,8 +85,8 @@ public class FacilitiesPropertyType {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link FacilitiesType }{@code >}
      *     {@link JAXBElement }{@code <}{@link DHWFacilitiesType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link FacilitiesType }{@code >}
      *     {@link JAXBElement }{@code <}{@link LightingFacilitiesType }{@code >}
      *     
      */

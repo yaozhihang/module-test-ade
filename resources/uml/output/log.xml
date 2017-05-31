@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><ShapeChangeResult xmlns="http://www.interactive-instruments.de/ShapeChange/Result" xmlns:r="http://www.interactive-instruments.de/ShapeChange/Result" config="C:\Eclipse_CityGML\3DCityDB_Workspace\module-test-ade\resources\uml\ShapeChangeConfigurationFile.xml" end="Mon May 22 20:41:29 CEST 2017" resultCode="0" start="Mon May 22 20:39:45 CEST 2017" version="2.3.0">
+<?xml version="1.0" encoding="UTF-8"?><ShapeChangeResult xmlns="http://www.interactive-instruments.de/ShapeChange/Result" xmlns:r="http://www.interactive-instruments.de/ShapeChange/Result" config="C:\Eclipse_CityGML\3DCityDB_Workspace\module-test-ade\resources\uml\ShapeChangeConfigurationFile.xml" end="Wed May 31 11:57:21 CEST 2017" resultCode="0" start="Wed May 31 11:55:35 CEST 2017" version="2.3.0">
   <Messages>
     <Info message="---------- Semantic validation of ShapeChange configuration: START ----------"/>
     <Info message="---------- Semantic validation of ShapeChange configuration: COMPLETE ----------"/>

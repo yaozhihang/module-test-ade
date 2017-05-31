@@ -1,8 +1,8 @@
 //
-// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version null
+// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version 2.4.3+1
 // ade-xjc is part of the citygml4j project, see https://github.com/citygml4j
 // Any modifications to this file will be lost upon recompilation of the source
-// Generated: Wed Apr 26 21:32:57 CEST 2017
+// Generated: Wed May 31 12:15:07 CEST 2017
 //
 
 
@@ -664,30 +664,6 @@ public abstract class _AbstractBuildingUnitType
 
     public void unsetConsistsOf() {
         this.consistsOf = null;
-    }
-
-    public void setUsage(List<CodeType> value) {
-        this.usage = value;
-    }
-
-    public void setFunction(List<CodeType> value) {
-        this.function = value;
-    }
-
-    public void setEnergyPerformanceCertification(List<EnergyPerformanceCertificationPropertyType> value) {
-        this.energyPerformanceCertification = value;
-    }
-
-    public void setAddress(List<AddressPropertyType> value) {
-        this.address = value;
-    }
-
-    public void setEquippedWith(List<FacilitiesPropertyType> value) {
-        this.equippedWith = value;
-    }
-
-    public void setConsistsOf(List<BuildingUnitPartPropertyType> value) {
-        this.consistsOf = value;
     }
 
 }

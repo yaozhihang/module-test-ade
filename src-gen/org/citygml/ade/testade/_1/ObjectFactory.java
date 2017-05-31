@@ -1,8 +1,8 @@
 //
-// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version null
+// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version 2.4.3+1
 // ade-xjc is part of the citygml4j project, see https://github.com/citygml4j
 // Any modifications to this file will be lost upon recompilation of the source
-// Generated: Wed Apr 26 21:32:57 CEST 2017
+// Generated: Wed May 31 12:15:07 CEST 2017
 //
 
 
@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
+import net.opengis.citygml.building._2.BoundarySurfacePropertyType;
 import net.opengis.gml.AreaType;
 
 
@@ -35,6 +36,7 @@ public class ObjectFactory {
     private final static QName _OwnerName_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "ownerName");
     private final static QName _DHWFacilities_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "DHWFacilities");
     private final static QName _BuildingUnitPart_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "BuildingUnitPart");
+    private final static QName _IndustrialBuildingPart_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "IndustrialBuildingPart");
     private final static QName _IndustrialBuilding_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "IndustrialBuilding");
     private final static QName _BuildingUnit_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "BuildingUnit");
     private final static QName __AbstractBuildingUnit_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "_AbstractBuildingUnit");
@@ -42,14 +44,25 @@ public class ObjectFactory {
     private final static QName _LightingFacilities_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "LightingFacilities");
     private final static QName _BuildingUnitProperty_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "buildingUnit");
     private final static QName _FloorArea_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "floorArea");
+    private final static QName _OtherConstruction_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "OtherConstruction");
     private final static QName _EnergyPerformanceCertification_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "EnergyPerformanceCertification");
+    private final static QName _IndustrialBuildingRoofSurface_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "IndustrialBuildingRoofSurface");
     private final static QName _Facilities_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "Facilities");
+    private final static QName _OtherConstructionTypeBoundedBy_QNAME = new QName("http://www.citygml.org/ade/TestADE/1.0", "boundedBy");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.citygml.ade.testade._1
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link IndustrialBuildingRoofSurfaceType }
+     * 
+     */
+    public IndustrialBuildingRoofSurfaceType createIndustrialBuildingRoofSurfaceType() {
+        return new IndustrialBuildingRoofSurfaceType();
     }
 
     /**
@@ -69,14 +82,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EnergyPerformanceCertificationType }
-     * 
-     */
-    public EnergyPerformanceCertificationType createEnergyPerformanceCertificationType() {
-        return new EnergyPerformanceCertificationType();
-    }
-
-    /**
      * Create an instance of {@link _AbstractBuildingUnitPropertyType }
      * 
      */
@@ -85,19 +90,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BuildingUnitPartType }
-     * 
-     */
-    public BuildingUnitPartType createBuildingUnitPartType() {
-        return new BuildingUnitPartType();
-    }
-
-    /**
      * Create an instance of {@link EnergyPerformanceCertificationPropertyType }
      * 
      */
     public EnergyPerformanceCertificationPropertyType createEnergyPerformanceCertificationPropertyType() {
         return new EnergyPerformanceCertificationPropertyType();
+    }
+
+    /**
+     * Create an instance of {@link IndustrialBuildingPartType }
+     * 
+     */
+    public IndustrialBuildingPartType createIndustrialBuildingPartType() {
+        return new IndustrialBuildingPartType();
+    }
+
+    /**
+     * Create an instance of {@link OtherConstructionType }
+     * 
+     */
+    public OtherConstructionType createOtherConstructionType() {
+        return new OtherConstructionType();
+    }
+
+    /**
+     * Create an instance of {@link EnergyPerformanceCertificationType }
+     * 
+     */
+    public EnergyPerformanceCertificationType createEnergyPerformanceCertificationType() {
+        return new EnergyPerformanceCertificationType();
+    }
+
+    /**
+     * Create an instance of {@link BuildingUnitPartType }
+     * 
+     */
+    public BuildingUnitPartType createBuildingUnitPartType() {
+        return new BuildingUnitPartType();
     }
 
     /**
@@ -133,6 +162,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link IndustrialBuildingPartPropertyType }
+     * 
+     */
+    public IndustrialBuildingPartPropertyType createIndustrialBuildingPartPropertyType() {
+        return new IndustrialBuildingPartPropertyType();
+    }
+
+    /**
      * Create an instance of {@link DHWFacilitiesPropertyType }
      * 
      */
@@ -149,6 +186,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link OtherConstructionPropertyType }
+     * 
+     */
+    public OtherConstructionPropertyType createOtherConstructionPropertyType() {
+        return new OtherConstructionPropertyType();
+    }
+
+    /**
      * Create an instance of {@link LightingFacilitiesPropertyType }
      * 
      */
@@ -162,6 +207,14 @@ public class ObjectFactory {
      */
     public FacilitiesPropertyType createFacilitiesPropertyType() {
         return new FacilitiesPropertyType();
+    }
+
+    /**
+     * Create an instance of {@link IndustrialBuildingRoofSurfacePropertyType }
+     * 
+     */
+    public IndustrialBuildingRoofSurfacePropertyType createIndustrialBuildingRoofSurfacePropertyType() {
+        return new IndustrialBuildingRoofSurfacePropertyType();
     }
 
     /**
@@ -189,6 +242,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "BuildingUnitPart", substitutionHeadNamespace = "http://www.citygml.org/ade/TestADE/1.0", substitutionHeadName = "_AbstractBuildingUnit")
     public JAXBElement<BuildingUnitPartType> createBuildingUnitPart(BuildingUnitPartType value) {
         return new JAXBElement<BuildingUnitPartType>(_BuildingUnitPart_QNAME, BuildingUnitPartType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IndustrialBuildingPartType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "IndustrialBuildingPart", substitutionHeadNamespace = "http://www.opengis.net/citygml/building/2.0", substitutionHeadName = "BuildingPart")
+    public JAXBElement<IndustrialBuildingPartType> createIndustrialBuildingPart(IndustrialBuildingPartType value) {
+        return new JAXBElement<IndustrialBuildingPartType>(_IndustrialBuildingPart_QNAME, IndustrialBuildingPartType.class, null, value);
     }
 
     /**
@@ -255,6 +317,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link OtherConstructionType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "OtherConstruction", substitutionHeadNamespace = "http://www.opengis.net/citygml/2.0", substitutionHeadName = "_Site")
+    public JAXBElement<OtherConstructionType> createOtherConstruction(OtherConstructionType value) {
+        return new JAXBElement<OtherConstructionType>(_OtherConstruction_QNAME, OtherConstructionType.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link EnergyPerformanceCertificationType }{@code >}}
      * 
      */
@@ -264,12 +335,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IndustrialBuildingRoofSurfaceType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "IndustrialBuildingRoofSurface", substitutionHeadNamespace = "http://www.opengis.net/citygml/building/2.0", substitutionHeadName = "RoofSurface")
+    public JAXBElement<IndustrialBuildingRoofSurfaceType> createIndustrialBuildingRoofSurface(IndustrialBuildingRoofSurfaceType value) {
+        return new JAXBElement<IndustrialBuildingRoofSurfaceType>(_IndustrialBuildingRoofSurface_QNAME, IndustrialBuildingRoofSurfaceType.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link FacilitiesType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "Facilities", substitutionHeadNamespace = "http://www.opengis.net/gml", substitutionHeadName = "_Feature")
     public JAXBElement<FacilitiesType> createFacilities(FacilitiesType value) {
         return new JAXBElement<FacilitiesType>(_Facilities_QNAME, FacilitiesType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BoundarySurfacePropertyType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.citygml.org/ade/TestADE/1.0", name = "boundedBy", scope = OtherConstructionType.class)
+    public JAXBElement<BoundarySurfacePropertyType> createOtherConstructionTypeBoundedBy(BoundarySurfacePropertyType value) {
+        return new JAXBElement<BoundarySurfacePropertyType>(_OtherConstructionTypeBoundedBy_QNAME, BoundarySurfacePropertyType.class, OtherConstructionType.class, value);
     }
 
 }
