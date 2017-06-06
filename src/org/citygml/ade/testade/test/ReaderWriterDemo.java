@@ -1,6 +1,7 @@
 package org.citygml.ade.testade.test;
 
 import java.io.File;
+import java.util.ServiceLoader;
 
 import org.citygml.ade.testade.TestADEContext;
 import org.citygml.ade.testade.model.BuildingUnit;
@@ -17,6 +18,7 @@ import org.citygml.ade.testade.model.IndustrialBuildingRoofSurface;
 import org.citygml.ade.testade.model.OtherConstruction;
 import org.citygml4j.CityGMLContext;
 import org.citygml4j.builder.CityGMLBuilder;
+import org.citygml4j.model.citygml.ade.binding.ADEContext;
 import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
 import org.citygml4j.model.citygml.building.BuildingPart;
 import org.citygml4j.model.citygml.building.BuildingPartProperty;
@@ -35,34 +37,37 @@ public class ReaderWriterDemo {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Starting TestADE sample program.");
-		
+
 		// create a citygml4j context and register the TestADE context
 		CityGMLContext context = new CityGMLContext();
-		context.registerADEContext(new TestADEContext());
-		
+
+		// load ade contexts
+		for (ADEContext adeContext : ServiceLoader.load(ADEContext.class))
+			context.registerADEContext(adeContext);
+
 		/**
 		 * Step 1: Create some TestADE features using the TestADE model classes.
 		 * The model classes can be used seamlessly with the citygml4j model classes.
 		 */
-		
+
 		System.out.println("Creating an example TestADE feature hierachy...");
-		
+
 		// create industrial building
 		IndustrialBuilding industrialBuilding = new IndustrialBuilding();
-		
+
 		// create industrial building part
 		IndustrialBuildingPart industrialBuildingPart = new IndustrialBuildingPart();
 		industrialBuildingPart.setRemark("This is a test industrial building part");
 		industrialBuilding.addConsistsOfBuildingPart(new BuildingPartProperty(industrialBuildingPart));
-		
+
 		// create OtherConstruction
 		OtherConstruction otherConstruction = new OtherConstruction();		
-		
+
 		// create industrial building roof surface
 		IndustrialBuildingRoofSurface industrialBuildingRoofSurface = new IndustrialBuildingRoofSurface();
 		industrialBuildingRoofSurface.setRemark("This is a test industrial building roof surface");		
 		otherConstruction.addBoundedBySurface(new BoundarySurfaceProperty(industrialBuildingRoofSurface));
-		
+
 		// create building part and assign to industrial building
 		BuildingPart buildingPart = new BuildingPart();
 		industrialBuilding.addConsistsOfBuildingPart(new BuildingPartProperty(buildingPart));
@@ -74,10 +79,10 @@ public class ReaderWriterDemo {
 		certification.addCertificationName("name");
 		certification.setCertificationId("id");
 		EnergyPerformanceCertificationProperty certificationProp = new EnergyPerformanceCertificationProperty(certification);
-		
+
 		EnergyPerformanceCertificationPropertyElement certificationADEProp = new EnergyPerformanceCertificationPropertyElement(certificationProp);
 		buildingPart.addGenericApplicationPropertyOfAbstractBuilding(certificationADEProp);
-		
+
 		// create building unit with DHW facility and
 		// assign to industrial building via ADE hook
 		BuildingUnit buildingUnit = new BuildingUnit();
@@ -85,26 +90,26 @@ public class ReaderWriterDemo {
 		Measure totalValue = new Measure();
 		totalValue.setValue(123.45);
 		totalValue.setUom("uom");
-		
+
 		dhwFacilities.setTotalValue(totalValue);
 		buildingUnit.addEquippedWith(new FacilitiesProperty(dhwFacilities));
-		
+
 		BuildingUnitPropertyElement adeUnitProp = new BuildingUnitPropertyElement(new BuildingUnitProperty(buildingUnit));
 		industrialBuilding.addGenericApplicationPropertyOfAbstractBuilding(adeUnitProp);
-		
+
 		// create city model and assign industrial building and other construction
 		CityModel cityModel = new CityModel();
 		cityModel.addCityObjectMember(new CityObjectMember(industrialBuilding));
 		cityModel.addCityObjectMember(new CityObjectMember(otherConstruction));
-		
+
 		/**
 		 * Step 2: Write the TestADE features to a CityGML dataset. 
 		 * No special code is required since the citygml4j context knows 
 		 * the TestADE context.
 		 */
-		
+
 		System.out.println("Writing the TestADE feature hierachy to 'test.gml'...");
-		
+
 		// write CityGML dataset
 		CityGMLBuilder builder = context.createCityGMLBuilder();
 		CityGMLOutputFactory out = builder.createCityGMLOutputFactory(CityGMLVersion.v2_0_0);
@@ -114,7 +119,7 @@ public class ReaderWriterDemo {
 		writer.setPrefixes(CityGMLVersion.v2_0_0);
 		writer.setPrefixes(context.getADEContexts());
 		writer.setSchemaLocations(CityGMLVersion.v2_0_0);
-		
+
 		// we provide the schema location to the CityGML-TestADE.xsd manually here.
 		// If the schema would be available on the Internet, the schema location could be
 		// hard-coded in the ADEModule of the TestADEContext.
@@ -122,26 +127,26 @@ public class ReaderWriterDemo {
 
 		writer.write(cityModel);
 		writer.close();
-		
+
 		/**
 		 * Step 3: Read the TestADE dataset. 
 		 * Again, no special code is required.
 		 */
-		
+
 		System.out.println("Reading the TestADE feature hierachy from 'test.gml'...");
 
 		CityGMLInputFactory in = builder.createCityGMLInputFactory();
 		CityGMLReader reader = in.createCityGMLReader(new File("datasets/test.gml"));
-		
+
 		// unmarshal dataset into a CityModel
 		cityModel = (CityModel)reader.nextFeature();
 		reader.close();
-		
+
 		// to demonstrate that we have successfully read all ADE content,
 		// we use a FeatureWalker to iterate through the hierarchy and
 		// simple print every feature it comes across to the console
 		// (citygml4j features + ADE features)
-		
+
 		// note that we have to make the ADE context known to the 
 		// feature walker. Otherwise the ADE features will not be found.		
 		FeatureWalker walker = new FeatureWalker() {
@@ -150,10 +155,10 @@ public class ReaderWriterDemo {
 				super.visit(abstractFeature);
 			}
 		}.useADEContexts(context.getADEContexts());
-		
+
 		System.out.println("The dataset contains the following features:");
 		cityModel.accept(walker);
-		
+
 		System.out.println("Sample program finished.");
 	}
 
