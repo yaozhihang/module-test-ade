@@ -2,7 +2,6 @@ package org.citygml.ade.testade.test;
 
 import java.io.File;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.citygml.ade.testade.TestADEContext;
 import org.citygml.ade.testade.model.BuildingUnit;
@@ -22,7 +21,6 @@ import org.citygml4j.model.citygml.CityGML;
 import org.citygml4j.model.citygml.CityGMLClass;
 import org.citygml4j.model.citygml.building.Building;
 import org.citygml4j.model.citygml.building.BuildingPartProperty;
-import org.citygml4j.model.citygml.core.AddressProperty;
 import org.citygml4j.model.citygml.core.CityModel;
 import org.citygml4j.model.citygml.core.CityObjectMember;
 import org.citygml4j.model.citygml.generics.GenericCityObject;

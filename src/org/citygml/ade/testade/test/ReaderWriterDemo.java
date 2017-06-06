@@ -3,7 +3,6 @@ package org.citygml.ade.testade.test;
 import java.io.File;
 import java.util.ServiceLoader;
 
-import org.citygml.ade.testade.TestADEContext;
 import org.citygml.ade.testade.model.BuildingUnit;
 import org.citygml.ade.testade.model.BuildingUnitProperty;
 import org.citygml.ade.testade.model.BuildingUnitPropertyElement;
