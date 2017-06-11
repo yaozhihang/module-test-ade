@@ -3,6 +3,8 @@ package org.citygml.ade.testade.model.module;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.xml.namespace.QName;
 
@@ -29,7 +31,7 @@ public class TestADEModule extends ADEModule {
 		super("http://www.citygml.org/ade/TestADE/1.0", 
 				"test", 
 				CityGMLVersion.v2_0_0);
-		
+
 		features = new HashMap<>();
 		features.put("_AbstractBuildingUnit", AbstractBuildingUnit.class);
 		features.put("BuildingUnit", BuildingUnit.class);
@@ -51,30 +53,33 @@ public class TestADEModule extends ADEModule {
 
 	@Override
 	public URL getSchemaResource() {
-		return TestADEContext.class.getResource("/org/citygml/ade/testade/_1/schema/CityGML-TestADE.xsd");
+		return TestADEContext.class.getResource("/org/citygml/ade/testade/bind/schema/CityGML-TestADE.xsd");
 	}
 
 	@Override
 	public boolean hasFeatureProperty(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		return featureProperties.contains(name);
 	}
 
 	@Override
 	public boolean hasFeature(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		return features.containsKey(name);
 	}
 
 	@Override
 	public Class<? extends AbstractFeature> getFeatureClass(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return features.get(name);
 	}
 
 	@Override
 	public QName getFeatureName(Class<? extends AbstractFeature> featureClass) {
-		// TODO Auto-generated method stub
+		Iterator<Entry<String, Class<? extends AbstractFeature>>> iter = features.entrySet().iterator();
+		while (iter.hasNext()) {
+			Entry<String, Class<? extends AbstractFeature>> entry = iter.next();
+			if (entry.getValue() == featureClass)
+				return new QName(getNamespaceURI(), entry.getKey());
+		}
+
 		return null;
 	}
 
