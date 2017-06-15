@@ -1,5 +1,6 @@
 package org.citygml.ade.testade.model;
 
+import org.citygml.ade.testade.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.CityGMLClass;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -8,6 +9,7 @@ import org.citygml4j.model.common.visitor.FeatureFunctor;
 import org.citygml4j.model.common.visitor.FeatureVisitor;
 import org.citygml4j.model.common.visitor.GMLFunctor;
 import org.citygml4j.model.common.visitor.GMLVisitor;
+import org.citygml4j.model.module.ade.ADEModule;
 
 public class IndustrialBuildingRoofSurface extends RoofSurface implements ADEModelObject {
 	private String remark;
@@ -62,6 +64,11 @@ public class IndustrialBuildingRoofSurface extends RoofSurface implements ADEMod
 	@Override
 	public CityGMLClass getCityGMLClass() {
 		return CityGMLClass.ADE_COMPONENT;
+	}
+	
+	@Override
+	public ADEModule getADEModule() {
+		return TestADEModule.v1_0;
 	}
 
 }

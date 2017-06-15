@@ -21,13 +21,12 @@ import org.citygml4j.util.walker.GMLFunctionWalker;
 import org.citygml4j.util.walker.GMLWalker;
 
 public class TestADEContext implements ADEContext {
-	private final ADEModule module = new TestADEModule();
 	private final TestADEMarshaller marshaller = new TestADEMarshaller();
 	private final TestADEUnmarshaller unmarshaller = new TestADEUnmarshaller();
 	
 	@Override
 	public List<ADEModule> getADEModules() {
-		return Arrays.asList(new ADEModule[]{module});
+		return Arrays.asList(new ADEModule[]{TestADEModule.v1_0});
 	}
 
 	@Override

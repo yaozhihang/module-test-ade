@@ -1,8 +1,10 @@
 package org.citygml.ade.testade.model;
 
+import org.citygml.ade.testade.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.gml.feature.FeatureProperty;
+import org.citygml4j.model.module.ade.ADEModule;
 
 public class BuildingUnitPartProperty extends FeatureProperty<BuildingUnitPart> implements ADEModelObject {
 
@@ -47,5 +49,10 @@ public class BuildingUnitPartProperty extends FeatureProperty<BuildingUnitPart> 
 	public Object copyTo(Object target, CopyBuilder copyBuilder) {
 		BuildingUnitPartProperty copy = (target == null) ? new BuildingUnitPartProperty() : (BuildingUnitPartProperty)target;
 		return super.copyTo(copy, copyBuilder);
+	}
+	
+	@Override
+	public ADEModule getADEModule() {
+		return TestADEModule.v1_0;
 	}
 }

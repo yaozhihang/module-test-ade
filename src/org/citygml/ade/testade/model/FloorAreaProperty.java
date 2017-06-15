@@ -1,8 +1,10 @@
 package org.citygml.ade.testade.model;
 
+import org.citygml.ade.testade.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.ade.binding.ADEGenericApplicationProperty;
 import org.citygml4j.model.gml.measures.Area;
+import org.citygml4j.model.module.ade.ADEModule;
 
 public class FloorAreaProperty extends ADEGenericApplicationProperty<Area> {
 
@@ -16,6 +18,11 @@ public class FloorAreaProperty extends ADEGenericApplicationProperty<Area> {
 	@Override
 	public Object copy(CopyBuilder copyBuilder) {
 		return copyTo(new FloorAreaProperty(), copyBuilder);
+	}
+	
+	@Override
+	public ADEModule getADEModule() {
+		return TestADEModule.v1_0;
 	}
 	
 }

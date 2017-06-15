@@ -24,10 +24,12 @@ import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 
 public class TestADEModule extends ADEModule {
+	public static final TestADEModule v1_0 = new TestADEModule();
+	
 	private HashMap<String, Class<? extends AbstractFeature>> features;
 	private HashSet<String> featureProperties;
 
-	public TestADEModule() {
+	private TestADEModule() {
 		super("http://www.citygml.org/ade/TestADE/1.0", 
 				"test", 
 				CityGMLVersion.v2_0_0);
