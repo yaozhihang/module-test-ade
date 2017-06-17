@@ -38,12 +38,12 @@ public class EnergyPerformanceCertificationProperty extends AssociationByRep<Ene
 
 	@Override
 	public Object copy(CopyBuilder copyBuilder) {
-		return copyTo(new EnergyPerformanceCertification(), copyBuilder);
+		return copyTo(new EnergyPerformanceCertificationProperty(), copyBuilder);
 	}
 
 	@Override
 	public Object copyTo(Object target, CopyBuilder copyBuilder) {
-		EnergyPerformanceCertification copy = (target == null) ? new EnergyPerformanceCertification() : (EnergyPerformanceCertification)target;
+		EnergyPerformanceCertificationProperty copy = (target == null) ? new EnergyPerformanceCertificationProperty() : (EnergyPerformanceCertificationProperty)target;
 		return super.copyTo(copy, copyBuilder);
 	}
 	
