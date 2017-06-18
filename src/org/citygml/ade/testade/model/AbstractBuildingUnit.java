@@ -21,6 +21,7 @@ import org.citygml4j.model.gml.geometry.aggregates.MultiCurveProperty;
 import org.citygml4j.model.gml.geometry.aggregates.MultiSurfaceProperty;
 import org.citygml4j.model.gml.geometry.primitives.SolidProperty;
 import org.citygml4j.model.module.ade.ADEModule;
+import org.citygml4j.util.bbox.BoundingBoxOptions;
 
 public abstract class AbstractBuildingUnit extends AbstractCityObject implements ADEModelObject {
 	private Code clazz;
@@ -352,8 +353,8 @@ public abstract class AbstractBuildingUnit extends AbstractCityObject implements
 	}
 
 	@Override
-	public BoundingShape calcBoundedBy(boolean setBoundedBy) {
-		BoundingShape boundedBy = new BoundingShape();
+	public BoundingShape calcBoundedBy(BoundingBoxOptions options) {
+		BoundingShape boundedBy = super.calcBoundedBy(options);
 		
 		SolidProperty solidProperty = null;
 		for (int lod = 1; lod < 5; lod++) {
@@ -373,11 +374,8 @@ public abstract class AbstractBuildingUnit extends AbstractCityObject implements
 			}
 			
 			if (solidProperty != null) {
-				if (solidProperty.isSetSolid()) {
-					calcBoundedBy(boundedBy, solidProperty.getSolid());
-				} else {
-					// xlink
-				}
+				if (solidProperty.isSetSolid())
+					boundedBy.updateEnvelope(solidProperty.getSolid().calcBoundingBox());
 			}
 		}
 		
@@ -399,11 +397,8 @@ public abstract class AbstractBuildingUnit extends AbstractCityObject implements
 			}
 			
 			if (multiSurfaceProperty != null) {
-				if (multiSurfaceProperty.isSetMultiSurface()) {
-					calcBoundedBy(boundedBy, multiSurfaceProperty.getMultiSurface());
-				} else {
-					// xlink
-				}
+				if (multiSurfaceProperty.isSetMultiSurface())
+					boundedBy.updateEnvelope(multiSurfaceProperty.getMultiSurface().calcBoundingBox());
 			}
 		}
 		
@@ -422,31 +417,22 @@ public abstract class AbstractBuildingUnit extends AbstractCityObject implements
 			}
 			
 			if (multiCurveProperty != null) {
-				if (multiCurveProperty.isSetMultiCurve()) {
-					calcBoundedBy(boundedBy, multiCurveProperty.getMultiCurve());
-				} else {
-					// xlink
-				}
+				if (multiCurveProperty.isSetMultiCurve())
+					boundedBy.updateEnvelope(multiCurveProperty.getMultiCurve().calcBoundingBox());
 			}
 		}
 
 		if (isSetConsistsOf()) {
 			for (BuildingUnitPartProperty buildingUnitPartProperty : getConsistsOf()) {
-				if (buildingUnitPartProperty.isSetObject()) {
-					calcBoundedBy(boundedBy, buildingUnitPartProperty.getObject(), setBoundedBy);
-				} else {
-					// xlink?
-				}
+				if (buildingUnitPartProperty.isSetObject())
+					boundedBy.updateEnvelope(buildingUnitPartProperty.getObject().calcBoundedBy(options).getEnvelope());
 			}
 		}
 		
-		if (boundedBy.isSetEnvelope()) {
-			if (setBoundedBy)
-				setBoundedBy(boundedBy);
-
-			return boundedBy;
-		} else
-			return null;
+		if (options.isAssignResultToFeatures())
+			setBoundedBy(boundedBy);
+		
+		return boundedBy;
 	}
 	
 	@Override
