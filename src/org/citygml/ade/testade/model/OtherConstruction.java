@@ -13,7 +13,9 @@ import org.citygml4j.model.common.visitor.FeatureFunctor;
 import org.citygml4j.model.common.visitor.FeatureVisitor;
 import org.citygml4j.model.common.visitor.GMLFunctor;
 import org.citygml4j.model.common.visitor.GMLVisitor;
+import org.citygml4j.model.gml.feature.BoundingShape;
 import org.citygml4j.model.module.ade.ADEModule;
+import org.citygml4j.util.bbox.BoundingBoxOptions;
 
 public class OtherConstruction extends AbstractSite implements ADEModelObject {
 	private List<BoundarySurfaceProperty> boundedBySurface;
@@ -51,6 +53,25 @@ public class OtherConstruction extends AbstractSite implements ADEModelObject {
 		return isSetBoundedBySurface() ? this.boundedBySurface.remove(boundedBySurface) : false;
 	}
 	
+	@Override
+	public BoundingShape calcBoundedBy(BoundingBoxOptions options) {
+		BoundingShape boundedBy = super.calcBoundedBy(options);
+		if (options.isUseExistingEnvelopes() && !boundedBy.isEmpty())
+			return boundedBy;
+		
+		if (isSetBoundedBySurface()) {
+			for (BoundarySurfaceProperty boundarySurfaceProperty : getBoundedBySurface()) {
+				if (boundarySurfaceProperty.isSetBoundarySurface())
+					boundedBy.updateEnvelope(boundarySurfaceProperty.getBoundarySurface().calcBoundedBy(options).getEnvelope());
+			}
+		}
+		
+		if (options.isAssignResultToFeatures())
+			setBoundedBy(boundedBy);
+		
+		return boundedBy;
+	}
+
 	@Override
 	public Object copy(CopyBuilder copyBuilder) {
 		return copyTo(new OtherConstruction(), copyBuilder);
