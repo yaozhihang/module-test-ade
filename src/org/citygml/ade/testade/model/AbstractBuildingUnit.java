@@ -355,6 +355,8 @@ public abstract class AbstractBuildingUnit extends AbstractCityObject implements
 	@Override
 	public BoundingShape calcBoundedBy(BoundingBoxOptions options) {
 		BoundingShape boundedBy = super.calcBoundedBy(options);
+		if (options.isUseExistingEnvelopes() && !boundedBy.isEmpty())
+			return boundedBy;
 		
 		SolidProperty solidProperty = null;
 		for (int lod = 1; lod < 5; lod++) {
