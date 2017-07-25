@@ -50,22 +50,22 @@ public class TestADEContext implements ADEContext {
 	}
 
 	@Override
-	public ADEWalker<FeatureWalker> getDefaultFeatureWalker() {
+	public ADEWalker<FeatureWalker> createDefaultFeatureWalker() {
 		return new TestADEFeatureWalker();
 	}
 
 	@Override
-	public ADEWalker<GMLWalker> getDefaultGMLWalker() {
+	public ADEWalker<GMLWalker> createDefaultGMLWalker() {
 		return new TestADEGMLWalker();
 	}
 
 	@Override
-	public <T> ADEWalker<FeatureFunctionWalker<T>> getDefaultFeatureFunctionWalker() {
+	public <T> ADEWalker<FeatureFunctionWalker<T>> createDefaultFeatureFunctionWalker() {
 		return new TestADEFeatureFunctionWalker<>();
 	}
 
 	@Override
-	public <T> ADEWalker<GMLFunctionWalker<T>> getDefaultGMLFunctionWalker() {
+	public <T> ADEWalker<GMLFunctionWalker<T>> createDefaultGMLFunctionWalker() {
 		return new TestADEGMLFunctionWalker<>();
 	}
 
