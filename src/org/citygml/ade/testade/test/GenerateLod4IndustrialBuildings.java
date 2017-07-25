@@ -56,13 +56,6 @@ public class GenerateLod4IndustrialBuildings {
 		
 		CityModel cityModel = new CityModel();
 		
-		// create a building unit being a city object member of the city model and
-		// enrich it with a Lod3MultiCurve property
-		BuildingUnit globalBuildingUnit = new BuildingUnit();
-		MultiCurve lod4MultiCurve = new MultiCurve();
-		globalBuildingUnit.setLod4MultiCurve(new MultiCurveProperty(lod4MultiCurve));
-		cityModel.getCityObjectMember().add(new CityObjectMember(globalBuildingUnit));
-		
 		// create an industrial building
 		IndustrialBuilding industrialBuilding = new IndustrialBuilding();
 		
@@ -91,10 +84,6 @@ public class GenerateLod4IndustrialBuildings {
 			if (feature.getCityGMLClass() == CityGMLClass.BUILDING) {
 				Building building = (Building)feature;
 				
-				if (building.getAddress().size() > 0) {
-					globalBuildingUnit.setAddress(building.getAddress());
-				}
-
 				// create building unit with DHW facility and
 				// assign to industrial building via ADE hook
 				BuildingUnit buildingUnit = new BuildingUnit();
@@ -115,18 +104,6 @@ public class GenerateLod4IndustrialBuildings {
 				buildingUnit.getEnergyPerformanceCertification().add(new EnergyPerformanceCertificationProperty(certification));				
 				BuildingUnitPropertyElement adeUnitProp = new BuildingUnitPropertyElement(new BuildingUnitProperty(buildingUnit));
 				industrialBuilding.addGenericApplicationPropertyOfAbstractBuilding(adeUnitProp);		
-			}
-			else if (feature.getCityGMLClass() == CityGMLClass.GENERIC_CITY_OBJECT){
-				GenericCityObject genericCityObject = (GenericCityObject)feature;
-				GeometryProperty<? extends AbstractGeometry> geometryProperty = genericCityObject.getLod4Geometry();
-				if (geometryProperty != null) {
-					if (geometryProperty.isSetGeometry()) {
-						AbstractGeometry abstractGeometry = geometryProperty.getGeometry();
-						if (abstractGeometry.getGMLClass() == GMLClass.LINE_STRING) {
-							lod4MultiCurve.addCurveMember(new CurveProperty((LineString)abstractGeometry));
-						}
-					}			
-				}	
 			}
 		}
 		
