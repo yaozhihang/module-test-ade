@@ -11,6 +11,7 @@
     <parameter name="inputFile" value="CityGML-TestADE.eap"/>
     <parameter name="appSchemaName" value="TestADE"/>
     <parameter name="checkingConstraints" value="disabled"/>
+	<parameter name="representTaggedValues" value="topLevel"/>
     <xi:include href="http://shapechange.net/resources/config/StandardAliases.xml"/>
     <stereotypeAliases>
       <StereotypeAlias wellknown="" alias="Property"/>
@@ -57,6 +58,11 @@
     </TargetXmlSchema>
     <Target class="de.interactive_instruments.ShapeChange.Target.Codelists.CodelistDictionaries" mode="enabled">
       <targetParameter name="outputDirectory" value="output"/>
+	  <rules>
+		<EncodingRule name="citygml-ade">
+		  <rule name="rule-xsd-all-tagged-values"/>	  
+		</EncodingRule>	
+	  </rules>
     </Target>
   </targets>
 
