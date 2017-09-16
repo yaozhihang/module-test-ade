@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/citygml4j-2.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/relaxngDatatype.jar"/>
 	<classpathentry kind="lib" path="lib/xsom.jar"/>
+	<classpathentry kind="lib" path="lib/citygml4j-2.5.0-beta.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
