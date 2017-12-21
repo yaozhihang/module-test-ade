@@ -9,6 +9,9 @@
         <jaxb:bindings node="xs:element[@name='energyPerformanceCertification']">
 			<jaxb:factoryMethod name="EnergyPerformanceCertificationProperty"/>
         </jaxb:bindings>
+        <jaxb:bindings node=".//xs:element[@name='boundedBy']">
+			<jaxb:property name="boundedBySurface" />
+		</jaxb:bindings>
     </jaxb:bindings>
     
 </jaxb:bindings>
